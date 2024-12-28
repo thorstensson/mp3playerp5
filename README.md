@@ -25,7 +25,7 @@ Part of the roadmap (see below) is to create a freestanding component companion 
 
 ## Demo
 
-Netlify demo to come here (fixing now)
+👉 Netlify: https://minimlaudio.netlify.app/ 
 
 
 ## Run Locally
@@ -33,7 +33,7 @@ Netlify demo to come here (fixing now)
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/thorstensson/audio-player-vue-ts.git
 ```
 
 Go to the project directory
