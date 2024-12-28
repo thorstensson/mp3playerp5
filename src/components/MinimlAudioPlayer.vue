@@ -35,7 +35,7 @@ const TRACK_WIDTH = 160;
 //Add tracks here; no plans to make a DOM playlist at the moment (see Roadmap)
 const playlist = reactive([
     { artist: "Ernes Guevara", track: "Ernes Guevara - Lost (Original Mix).mp3" },
-    { artist: "Stockholm Syndrome, Young Squage", track: "Stockholm Syndrome, Young Squage - Hysteria (feat. Stockholm Syndrome) (Radio Edit).mp3" },
+    { artist: "Stockholm Syndrome, Young Squage", track: "EMPHI - Stockholm Syndrome (Original Mix).mp3" },
     { artist: "EMPHI", track: "EMPHI - Pair of Dice (Original Mix).mp3" }
 ]);
 
@@ -53,19 +53,11 @@ const currTrack = computed(() => {
  * TODO: Make this a composable, also when that is done, it should be in MinimlSpectrumVisualizer
  */
 const createAudioContext = () => {
-    console.log("CONTEXT")
     audioCtx = new AudioContext();
     const audioSrc = audioCtx.createMediaElementSource(audioEl.value!)
     analyser = audioCtx.createAnalyser();
     audioSrc.connect(analyser);
     analyser.connect(audioCtx.destination);
-
-    /* leaving gain node out of the code for the moment, many report 0 as not 0 on gain, using regular volume
-    gainNode = audioCtx.createGain();
-    gainNode.gain.value = 0;
-    gainNode.connect(audioCtx.destination);
-    audioSrc.connect(gainNode);
-    */
 
     if (audioCtx.state === "suspended") {
         audioCtx.resume();
@@ -94,12 +86,17 @@ const togglePlay = () => {
 }
 
 const playNext = () => {
-    // provides a way to cancel event, needed if end of last track in playlist
-    const cancelcan = useEventListener(audioEl.value as unknown as MaybeRef, 'canplaythrough', () => {
-        spectrum.value?.startAnimRequest();
+    // vueuse, easy cancel. oncanplaythrough does not work on mobile, loadedmetadata does???
+    const cancelcan = useEventListener(audioEl.value as unknown as MaybeRef, 'loadedmetadata', () => {
         audioEl.value?.play();
+        spectrum.value?.startAnimRequest();
         cancelcan();
     })
+    // synchronous, so we do this after adding event
+    isPlaying.value = true;
+    audioEl.value!.currentTime = 0;
+    currentTrack.value = currTrack.value;
+    audioEl.value?.load();
 }
 
 // E from v-on listener
@@ -128,18 +125,15 @@ const durationUpdate = () => {
 
 const onTrackEnded = () => {
     progressBarFilled.value!.style.flexBasis = "0%";
-    if (playlistLen.value && audioEl.value) {
-        audioEl.value.pause();
-        spectrum.value?.cancelAnimRequest()
-        audioEl.value.currentTime = 0;
+    if (playlistLen.value && spectrum.value) {
+        spectrum.value.cancelAnimRequest()
         trackIndex.value++;
-        currentTrack.value = currTrack.value;
         playNext();
-    } else if (audioEl.value) {
-        spectrum.value?.cancelAnimRequest()
+    } else if (audioEl.value && spectrum.value) {
+        spectrum.value.cancelAnimRequest()
         isPlaying.value = false;
         trackIndex.value = 0;
-        audioEl.value?.pause();
+        audioEl.value.pause();
         audioEl.value.currentTime = 0;
         currentTrack.value = currTrack.value;
     }
@@ -166,25 +160,26 @@ onMounted(() => {
     currentTrack.value = currTrack.value;
     let mousedown = false;
 
-    if (audioEl.value && volume.value) {
-        progressBar.value?.addEventListener("click", doScrub)
-        progressBar.value?.addEventListener("mousemove", (e) => mousedown && doScrub(e))
-        progressBar.value?.addEventListener("mousedown", () => (mousedown = true))
-        progressBar.value?.addEventListener("mouseup", () => (mousedown = false))
+    if (audioEl.value && volume.value && progressBar.value) {
+        progressBar.value.addEventListener("click", doScrub)
+        progressBar.value.addEventListener("mousemove", (e) => mousedown && doScrub(e))
+        progressBar.value.addEventListener("mousedown", () => (mousedown = true))
+        progressBar.value.addEventListener("mouseup", () => (mousedown = false))
+
         volume.value.addEventListener("change", () => {
-            // grr at 0 it was not zero gainNode.gain.value = Number(volume.value?.value);
             audioEl.value!.volume = Number(volume.value?.value);
         })
+        // Mobile
         volume.value.addEventListener("touchmove", () => {
             audioEl.value!.volume = Number(volume.value?.value);
-        })
+        }, { passive: true })
     }
 });
 </script>
 
 <template>
     <div class="player-wrapper">
-        <audio :src="`${PATH}/${currentTrack}`" type="audio/mp3" preload="metadata" v-on:timeupdate="timeUpdate"
+        <audio :src="`${PATH}/${currentTrack}`" type="audio/mp3" preload="auto" v-on:timeupdate="timeUpdate"
             v-on:durationchange="durationUpdate" v-on:ended="onTrackEnded" ref="audio-element" crossorigin="anonymous">
         </audio>
         <div class="panel">
@@ -222,6 +217,24 @@ onMounted(() => {
 /** 
  * Please note that I use a variable Typekit font, update SCSS files as you need *
  */
+
+.currstate {
+    color: white;
+    /* margin-top: 100px; */
+    position: fixed;
+    width: 100px;
+    top: 100px;
+    left: 0px;
+    z-index: 900;
+    font-size: 20px;
+}
+
+body {
+    -webkit-overflow-scrolling: none;
+    overflow: hidden;
+    overscroll-behavior: none;
+}
+
 .player-wrapper {
     position: relative;
     width: 280px;
