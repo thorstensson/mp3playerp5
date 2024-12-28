@@ -8,11 +8,12 @@
 
 # Audio Player - Vue - TS - Web Audio API
 
-I've been researching the Web Audio API over the 'holidays', thus the birth of this little Audio Player. The player's spectrum bar reflects an array of sample rate data points; it fetches these points from the Audio API's frequency property and draws them onto the canvas. 
+I've been researching the Web Audio API over the 'holidays', thus the birth of this little Audio Player. The player's spectrum bar reflects an array of sample rate data points.
 
-The playlist is virtual, and plays tracks stored in my S3 Amazon bucket (please don't re-use this bucket as it is set to public). See below for a suggested S3 configuration if you like to add your own tracks to S3.
+The playlist is virtual, and will probably stay so. I currently store the tracks in my S3 Amazon bucket (please don't re-use this bucket as it is set to public). But if you clone this, and you don't want to bother with S3, then just update the PATH variable in MinimlAudioPlayer to point to @/assets/audio, then drop some mp3's in there and play on localhost.
 
-Part of the roadmap (see below) is to create a freestanding component companion to the Audio Player to generate colourful patterns on a larger HTML canvas. 🎅🎅🎅
+On the roadmap: to write a freestanding (can live anywhere in the DOM tree) spectrum visualiser which generates colourful patterns on a larger HTML canvas. 🎅
+
 
 ## Demo
 
@@ -46,7 +47,7 @@ Start the server
 ```
 ## Suggested S3 config (if you're ok with a public S3 bucket)
 
-To be able to play mp3 files from S3 without running into cors restrictions, you need to configure the S3 bucket and its CORS policy. Login to your AWS, click on your bucket, then click on permissions and scroll down. Then add the below where it says
+To be able to play mp3 files from S3 without running into CORS restrictions, you need to configure the S3 bucket and its CORS policy. Login to your AWS, click on your bucket, then click on permissions and scroll down. Then add
 
 ### Bucket Policy
 ```json
@@ -88,9 +89,9 @@ To be able to play mp3 files from S3 without running into cors restrictions, you
 ]
 ```
 
-#### The path to your tracks will then be: https://{YOUR BUCKET NAME}.amazonaws.com
+#### The path to your tracks will then be: https://{YOUR BUCKET NAME}.amazonaws.com 🔥
 
-🔥🔥🔥
+Alternatively, research how to use a signed URL to protect access...
 
 ## Roadmap
 
