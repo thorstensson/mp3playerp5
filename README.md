@@ -43,7 +43,7 @@ Install dependencies
 Start the server
 
 ```bash
-  npm run start
+  npm run dev
 ```
 ## Suggested S3 config (if you're ok with a public S3 bucket)
 
