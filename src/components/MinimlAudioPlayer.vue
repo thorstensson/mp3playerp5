@@ -8,7 +8,7 @@ import MinimlSpectrumVisualizer from "./MinimlSpectrumVisualizer.vue";
 
 let audioCtx: AudioContext;
 let analyser: AnalyserNode;
-let gainNode: GainNode;
+//let gainNode: GainNode;
 
 const firstRun = ref<boolean>(true);
 
@@ -53,16 +53,19 @@ const currTrack = computed(() => {
  * TODO: Make this a composable, also when that is done, it should be in MinimlSpectrumVisualizer
  */
 const createAudioContext = () => {
+    console.log("CONTEXT")
     audioCtx = new AudioContext();
     const audioSrc = audioCtx.createMediaElementSource(audioEl.value!)
     analyser = audioCtx.createAnalyser();
     audioSrc.connect(analyser);
     analyser.connect(audioCtx.destination);
 
+    /* leaving gain node out of the code for the moment, many report 0 as not 0 on gain, using regular volume
     gainNode = audioCtx.createGain();
-    gainNode.gain.value = 100;
-    audioSrc.connect(gainNode);
+    gainNode.gain.value = 0;
     gainNode.connect(audioCtx.destination);
+    audioSrc.connect(gainNode);
+    */
 
     if (audioCtx.state === "suspended") {
         audioCtx.resume();
@@ -79,7 +82,6 @@ const doScrub = (e: MouseEvent) => {
 
 // Turns out that AudioContext too needs user interaction before instantiation
 const togglePlay = () => {
-    audioEl.value?.removeEventListener("canplaythrough", togglePlay)
     if (firstRun.value) createAudioContext()
     isPlaying.value = !isPlaying.value;
     if (isPlaying.value && audioEl.value) {
@@ -162,16 +164,20 @@ watch(
 
 onMounted(() => {
     currentTrack.value = currTrack.value;
-
     let mousedown = false;
-    if (progressBar.value && volume.value) {
 
-        progressBar.value.addEventListener("click", doScrub)
-        progressBar.value.addEventListener("mousemove", (e) => mousedown && doScrub(e))
-        progressBar.value.addEventListener("mousedown", () => (mousedown = true))
-        progressBar.value.addEventListener("mouseup", () => (mousedown = false))
-        volume.value.addEventListener("change", () => { gainNode.gain.value = Number(volume.value?.value) })
-
+    if (audioEl.value && volume.value) {
+        progressBar.value?.addEventListener("click", doScrub)
+        progressBar.value?.addEventListener("mousemove", (e) => mousedown && doScrub(e))
+        progressBar.value?.addEventListener("mousedown", () => (mousedown = true))
+        progressBar.value?.addEventListener("mouseup", () => (mousedown = false))
+        volume.value.addEventListener("change", () => {
+            // grr at 0 it was not zero gainNode.gain.value = Number(volume.value?.value);
+            audioEl.value!.volume = Number(volume.value?.value);
+        })
+        volume.value.addEventListener("touchmove", () => {
+            audioEl.value!.volume = Number(volume.value?.value);
+        })
     }
 });
 </script>
@@ -201,7 +207,7 @@ onMounted(() => {
             </div>
         </div>
         <div class="volume">
-            <input type="range" id="volume" min="0" max="1" value="1" step="0.01" class="volume__range" ref="volume" />
+            <input type="range" id="volume" min="0" max="1" value=".1" step="0.1" class="volume__range" ref="volume" />
         </div>
         <div class="controls">
             <div class="controls__pause-txt" :class="{ 'controls__pause-txt--show': !isPlaying }">PAUSE</div>
@@ -220,6 +226,9 @@ onMounted(() => {
     position: relative;
     width: 280px;
     height: 80px;
+    -webkit-overflow-scrolling: none;
+    overflow: hidden;
+    overscroll-behavior: none;
 }
 
 .player-wrapper * {
