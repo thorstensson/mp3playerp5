@@ -14,6 +14,8 @@ The playlist is virtual, and will probably stay so. I currently store the tracks
 
 On the roadmap: to write a freestanding (can live anywhere in the DOM tree) spectrum visualiser which generates colourful patterns on a larger HTML canvas. 🎅
 
+NOTE: I am aware of CSS and Audio issues on Safari and will update player as soon as I have time this week, and will most likely leave volume to device control and insert next & back buttons instead. Same goes for iOS. Apple does not allow volume control of native Audio Element; youtube bypasses this by connecting directly to iOS via Apple's API. SoundCloud leaves volume to device control on mobile.
+
 
 ## Demo
 
