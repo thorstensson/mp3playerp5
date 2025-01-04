@@ -382,7 +382,7 @@ body {
     &__prev,
     &__next {
         position: absolute;
-        width: 34px;
+        width: 31px;
         height: auto;
         right: 25px;
         top: 50%;
