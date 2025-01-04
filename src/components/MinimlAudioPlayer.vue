@@ -3,7 +3,7 @@ import { ref, useTemplateRef, reactive, watch, onMounted, computed } from "vue";
 import { useEventListener } from "@vueuse/core";
 import type { MaybeRef } from "@vueuse/core";
 import { gsap } from "gsap";
-import { PlayIcon, PauseIcon } from "@heroicons/vue/24/solid";
+import { PlayIcon, PauseIcon, ChevronRightIcon, ChevronLeftIcon } from "@heroicons/vue/24/solid";
 import MinimlSpectrumVisualizer from "./MinimlSpectrumVisualizer.vue";
 
 let audioCtx: AudioContext;
@@ -13,7 +13,6 @@ let analyser: AnalyserNode;
 const firstRun = ref<boolean>(true);
 
 const spectrum = useTemplateRef("spectrum");
-const volume = useTemplateRef("volume");
 const audioEl = useTemplateRef("audio-element");
 const progressBar = useTemplateRef("progress-bar");
 const progressBarFilled = useTemplateRef("progress-bar-filled");
@@ -40,8 +39,12 @@ const playlist = reactive([
 ]);
 
 // Check for remaining tracks 
-const playlistLen = computed(() => {
+const ifTrackNext = computed(() => {
     return trackIndex.value < playlist.length - 1;
+})
+
+const ifTrackPrev = computed(() => {
+    return trackIndex.value > 0;
 })
 
 const currTrack = computed(() => {
@@ -85,7 +88,25 @@ const togglePlay = () => {
     }
 }
 
-const playNext = () => {
+// Check if audio conttext also as next can be first
+const nextTrack = () => {
+    if (firstRun.value) createAudioContext();
+    if (!isPlaying.value) isPlaying.value = true;
+    if (ifTrackNext.value && spectrum.value) {
+        trackIndex.value++;
+        playTrack();
+    }
+}
+
+const prevTrack = () => {
+    if (ifTrackPrev.value && spectrum.value) {
+        console.log("NOOO")
+        trackIndex.value--;
+        playTrack();
+    }
+}
+
+const playTrack = () => {
     // vueuse, easy cancel. oncanplaythrough does not work on mobile, loadedmetadata does???
     const cancelcan = useEventListener(audioEl.value as unknown as MaybeRef, 'loadedmetadata', () => {
         audioEl.value?.play();
@@ -125,10 +146,10 @@ const durationUpdate = () => {
 
 const onTrackEnded = () => {
     progressBarFilled.value!.style.flexBasis = "0%";
-    if (playlistLen.value && spectrum.value) {
+    if (ifTrackNext.value && spectrum.value) {
         spectrum.value.cancelAnimRequest()
         trackIndex.value++;
-        playNext();
+        playTrack();
     } else if (audioEl.value && spectrum.value) {
         spectrum.value.cancelAnimRequest()
         isPlaying.value = false;
@@ -146,7 +167,7 @@ watch(
         const { width } = panelTrack.value?.getBoundingClientRect() || {};
         const trackAnim = gsap.timeline();
         if (isPlaying.value && (width && width > TRACK_WIDTH)) {
-            const remWidth = width - TRACK_WIDTH;
+            const remWidth = width - TRACK_WIDTH +10;
             trackAnim.fromTo(".panel__box__track", { x: 0 }, {
                 duration: width / 100, x: -remWidth, repeat: -1, yoyo: true, ease: "sine.inOut"
             });
@@ -160,19 +181,11 @@ onMounted(() => {
     currentTrack.value = currTrack.value;
     let mousedown = false;
 
-    if (audioEl.value && volume.value && progressBar.value) {
+    if (audioEl.value && progressBar.value) {
         progressBar.value.addEventListener("click", doScrub)
         progressBar.value.addEventListener("mousemove", (e) => mousedown && doScrub(e))
         progressBar.value.addEventListener("mousedown", () => (mousedown = true))
         progressBar.value.addEventListener("mouseup", () => (mousedown = false))
-
-        volume.value.addEventListener("change", () => {
-            audioEl.value!.volume = Number(volume.value?.value);
-        })
-        // Mobile
-        volume.value.addEventListener("touchmove", () => {
-            audioEl.value!.volume = Number(volume.value?.value);
-        }, { passive: true })
     }
 });
 </script>
@@ -201,13 +214,12 @@ onMounted(() => {
                 <div class="progress__bar__filled" ref="progress-bar-filled"></div>
             </div>
         </div>
-        <div class="volume">
-            <input type="range" id="volume" min="0" max="1" value=".1" step="0.1" class="volume__range" ref="volume" />
-        </div>
         <div class="controls">
             <div class="controls__pause-txt" :class="{ 'controls__pause-txt--show': !isPlaying }">PAUSE</div>
             <PlayIcon @click="togglePlay" class="controls__play" :class="{ 'controls__play--show': !isPlaying }" />
             <PauseIcon @click="togglePlay" class="controls__pause" :class="{ 'controls__pause--show': isPlaying }" />
+            <ChevronLeftIcon @click="prevTrack" class="controls__prev" :class="{ 'controls__prev--end': !ifTrackPrev }"></ChevronLeftIcon>
+            <ChevronRightIcon @click="nextTrack" class="controls__next" :class="{ 'controls__next--end': !ifTrackNext }" ></ChevronRightIcon>
         </div>
         <MinimlSpectrumVisualizer :analyser="analyser" ref="spectrum" />
     </div>
@@ -257,7 +269,6 @@ body {
     height: 100%;
     background-color: $clr-tertiary;
     border-radius: 25px;
-    user-select: none;
 
     &__box {
         position: relative;
@@ -315,7 +326,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    user-select: none;
 
     &__bar {
         display: flex;
@@ -330,54 +340,15 @@ body {
         flex-basis: 100%;
         overflow: hidden;
         z-index: 100;
+        cursor: pointer;
 
         &__filled {
             height: 4px;
-            background: $clr-quarternary;
+            background: $clr-primary;
             flex: 0;
             flex-basis: 0%;
             border-radius: 25px;
         }
-    }
-}
-
-.volume {
-
-    position: absolute;
-    right: 16px;
-    top: 6px;
-    z-index: 200;
-
-    &__range {
-        appearance: none;
-        width: 4px;
-        height: 50px;
-        border-radius: 9999px;
-        background: #dddddd;
-        writing-mode: vertical-rl;
-        direction: rtl;
-        cursor: pointer;
-    }
-
-    /* Thumb: for Chrome, Safari, Edge */
-    &__range::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 12px;
-        height: 12px;
-        border-radius: 9999px;
-        background: $clr-quinary;
-        box-shadow: none;
-    }
-
-    /* Thumb: for Firefox */
-    &__range::-moz-range-thumb {
-        border: none;
-        width: 12px;
-        height: 12px;
-        border-radius: 9999px;
-        background: $clr-quinary;
-        box-shadow: none;
     }
 }
 
@@ -406,6 +377,27 @@ body {
             display: block;
             filter: brightness(1);
         }
+    }
+
+    &__prev,
+    &__next {
+        position: absolute;
+        width: 34px;
+        height: auto;
+        right: 25px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $clr-quinary;
+        cursor: pointer;
+        opacity:1;
+
+        &--end{
+            opacity: .5;
+        }
+    }
+
+    &__next {
+        right:5px;
     }
 
     &__pause-txt {

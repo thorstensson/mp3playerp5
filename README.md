@@ -14,9 +14,6 @@ The playlist is virtual, and will probably stay so. I currently store the tracks
 
 On the roadmap: to write a freestanding (can live anywhere in the DOM tree) spectrum visualiser which generates colourful patterns on a larger HTML canvas. 🎅
 
-NOTE: I am aware of CSS and Audio issues on Safari and will update player as soon as I have time this week, and will most likely leave volume to device control and insert next & back buttons instead. Same goes for iOS. Apple does not allow volume control of native Audio Element; youtube bypasses this by connecting directly to iOS via Apple's API. SoundCloud leaves volume to device control on mobile.
-
-
 ## Demo
 
 👉 Netlify: https://minimlaudio.netlify.app/ 
@@ -97,9 +94,9 @@ Alternatively, research how to use a signed URL to protect access...
 
 ## Roadmap
 
-- [X] Fix automatic playback of playlist
+- [X] Fix automatic playback.
 
-- [ ] Write a composable to check if user is on IOS, if so, show mute unmute icons instead of volume range slider, since iOS does not allow direct volume control of HTMLAudioElement (only device control).
+- [X] Leave volume to users device control and add instead next and previous buttons to UI.
 
 - [ ] Move all Web Audio API stuff into the SpectrumVisualizer.
 

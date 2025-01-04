@@ -35,7 +35,7 @@ const startAnimRequest = () => {
             analyser.getByteFrequencyData(dataArray);
             for (let i = 0; i < bufferLength; i++) {
                 const barHeight = dataArray[i];
-                ctx.fillStyle = "#f8f9fa";
+                ctx.fillStyle = "#000102";
                 ctx.fillRect(x, canvas.value.height - barHeight, barWidth, barHeight);
                 x += barWidth + 1;
             }
@@ -76,6 +76,7 @@ defineExpose({
 .canvas-wrapper {
     display: flex;
     justify-content: center;
+    user-select: none;
 }
 
 #canvas {
@@ -83,5 +84,6 @@ defineExpose({
     position: absolute;
     width: 160px;
     height: 25px;
+    user-select: none;
 }
 </style>
