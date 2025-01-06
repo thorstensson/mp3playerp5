@@ -98,13 +98,9 @@ Alternatively, research how to use a signed URL to protect access...
 
 - [X] Leave volume to users device control and add instead next and previous buttons to UI.
 
-- [ ] Move all Web Audio API stuff into the SpectrumVisualizer.
+- [X] Move all Web Audio API stuff into the SpectrumVisualizer.
 
-- [ ] Write a composable that handles the creation the Web Audio API.
-
-- [ ] Consider how to best do the freestanding visualizer component which should be able to live anywhere in the DOM tree.
-
-- [ ] Consider creating an even more minimal player with only stop, play and SpectrumVisualizer for footers.
+- [ ] Consider how to best do the freestanding visualizer component which should be able to live anywhere in the DOM tree. (When I tick this one off; watch for a new repo)
 
 ## Contributing
 
