@@ -1,16 +1,11 @@
 <script setup lang="ts">
 import { ref, useTemplateRef, reactive, watch, onMounted, computed } from "vue";
-import { useEventListener } from "@vueuse/core";
-import type { MaybeRef } from "@vueuse/core";
+import { useEventListener, type MaybeRef } from "@vueuse/core";
 import { gsap } from "gsap";
 import { PlayIcon, PauseIcon, ChevronRightIcon, ChevronLeftIcon } from "@heroicons/vue/24/solid";
+
 import MinimlSpectrumVisualizer from "./MinimlSpectrumVisualizer.vue";
-
-let audioCtx: AudioContext;
-let analyser: AnalyserNode;
-//let gainNode: GainNode;
-
-const firstRun = ref<boolean>(true);
+import { useStoreRef } from "@/composable/useStoreRef";
 
 const spectrum = useTemplateRef("spectrum");
 const audioEl = useTemplateRef("audio-element");
@@ -24,14 +19,13 @@ const trackIndex = ref<number>(0);
 const currentTrack = ref<string>("");
 const isPlaying = ref<boolean>(false);
 
-// Add mp3 path here, local or online, but use your own S3 bucket or local path
+// Add mp3 path here, note if you are testing on Vite with localhost metadata events wont fire (next , previous)
 const PATH = "https://audio-tt.s3.amazonaws.com";
 
 // The panel width, if track text wider then GSAP yoyo
 const TRACK_WIDTH = 160;
 
-
-//Add tracks here; no plans to make a DOM playlist at the moment (see Roadmap)
+//Add tracks here; no plans to make a DOM playlist
 const playlist = reactive([
     { artist: "Ernes Guevara", track: "Ernes Guevara - Lost (Original Mix).mp3" },
     { artist: "Stockholm Syndrome, Young Squage", track: "EMPHI - Stockholm Syndrome (Original Mix).mp3" },
@@ -47,26 +41,10 @@ const ifTrackPrev = computed(() => {
     return trackIndex.value > 0;
 })
 
+// Check for current track
 const currTrack = computed(() => {
     return playlist[trackIndex.value].track;
 })
-
-/**
- * We create an AudioContext after user interaction. 
- * TODO: Make this a composable, also when that is done, it should be in MinimlSpectrumVisualizer
- */
-const createAudioContext = () => {
-    audioCtx = new AudioContext();
-    const audioSrc = audioCtx.createMediaElementSource(audioEl.value!)
-    analyser = audioCtx.createAnalyser();
-    audioSrc.connect(analyser);
-    analyser.connect(audioCtx.destination);
-
-    if (audioCtx.state === "suspended") {
-        audioCtx.resume();
-    }
-    firstRun.value = false;
-}
 
 const doScrub = (e: MouseEvent) => {
     if (progressBar.value && audioEl.value) {
@@ -75,45 +53,46 @@ const doScrub = (e: MouseEvent) => {
     }
 }
 
-// Turns out that AudioContext too needs user interaction before instantiation
 const togglePlay = () => {
-    if (firstRun.value) createAudioContext()
     isPlaying.value = !isPlaying.value;
     if (isPlaying.value && audioEl.value) {
-        audioEl.value.play()
-        spectrum.value?.startAnimRequest();
+        playTrack()
     } else if (audioEl.value) {
         audioEl.value.pause();
-        spectrum.value?.cancelAnimRequest()
     }
 }
 
-// Check if audio conttext also as next can be first
+// For previous and next we need to know if track is playing when we press them
 const nextTrack = () => {
-    if (firstRun.value) createAudioContext();
-    if (!isPlaying.value) isPlaying.value = true;
-    if (ifTrackNext.value && spectrum.value) {
+    if (ifTrackNext.value && !isPlaying.value) {
+        trackIndex.value++;
+        currentTrack.value = currTrack.value;
+    } else if (ifTrackNext.value) {
+        isPlaying.value = true;
         trackIndex.value++;
         playTrack();
     }
 }
 
 const prevTrack = () => {
-    if (ifTrackPrev.value && spectrum.value) {
-        console.log("NOOO")
+    if (ifTrackPrev.value && !isPlaying.value) {
+        trackIndex.value--;
+        currentTrack.value = currTrack.value;
+    } else if (ifTrackPrev.value) {
+        isPlaying.value = true;
         trackIndex.value--;
         playTrack();
     }
 }
 
 const playTrack = () => {
-    // vueuse, easy cancel. oncanplaythrough does not work on mobile, loadedmetadata does???
+    // Vueuse, easy cancel. oncanplaythrough does not work on mobile, loadedmetadata does???
     const cancelcan = useEventListener(audioEl.value as unknown as MaybeRef, 'loadedmetadata', () => {
+        console.log("YEP")
         audioEl.value?.play();
-        spectrum.value?.startAnimRequest();
         cancelcan();
     })
-    // synchronous, so we do this after adding event
+    // Synchronous, so we do this after adding event
     isPlaying.value = true;
     audioEl.value!.currentTime = 0;
     currentTrack.value = currTrack.value;
@@ -147,11 +126,9 @@ const durationUpdate = () => {
 const onTrackEnded = () => {
     progressBarFilled.value!.style.flexBasis = "0%";
     if (ifTrackNext.value && spectrum.value) {
-        spectrum.value.cancelAnimRequest()
         trackIndex.value++;
         playTrack();
     } else if (audioEl.value && spectrum.value) {
-        spectrum.value.cancelAnimRequest()
         isPlaying.value = false;
         trackIndex.value = 0;
         audioEl.value.pause();
@@ -167,7 +144,7 @@ watch(
         const { width } = panelTrack.value?.getBoundingClientRect() || {};
         const trackAnim = gsap.timeline();
         if (isPlaying.value && (width && width > TRACK_WIDTH)) {
-            const remWidth = width - TRACK_WIDTH +10;
+            const remWidth = width - TRACK_WIDTH + 10;
             trackAnim.fromTo(".panel__box__track", { x: 0 }, {
                 duration: width / 100, x: -remWidth, repeat: -1, yoyo: true, ease: "sine.inOut"
             });
@@ -178,6 +155,9 @@ watch(
 )
 
 onMounted(() => {
+    const { addElem } = useStoreRef();
+    addElem('audioEl', audioEl);
+
     currentTrack.value = currTrack.value;
     let mousedown = false;
 
@@ -218,10 +198,14 @@ onMounted(() => {
             <div class="controls__pause-txt" :class="{ 'controls__pause-txt--show': !isPlaying }">PAUSE</div>
             <PlayIcon @click="togglePlay" class="controls__play" :class="{ 'controls__play--show': !isPlaying }" />
             <PauseIcon @click="togglePlay" class="controls__pause" :class="{ 'controls__pause--show': isPlaying }" />
-            <ChevronLeftIcon @click="prevTrack" class="controls__prev" :class="{ 'controls__prev--end': !ifTrackPrev }"></ChevronLeftIcon>
-            <ChevronRightIcon @click="nextTrack" class="controls__next" :class="{ 'controls__next--end': !ifTrackNext }" ></ChevronRightIcon>
+            <ChevronLeftIcon @click="prevTrack" class="controls__prev" :class="{ 'controls__prev--end': !ifTrackPrev }">
+            </ChevronLeftIcon>
+            <ChevronRightIcon @click="nextTrack" class="controls__next"
+                :class="{ 'controls__next--end': !ifTrackNext }"></ChevronRightIcon>
         </div>
-        <MinimlSpectrumVisualizer :analyser="analyser" ref="spectrum" />
+        <div v-if="audioEl">
+            <MinimlSpectrumVisualizer ref="spectrum" />
+        </div>
     </div>
 </template>
 
@@ -389,15 +373,15 @@ body {
         transform: translateY(-50%);
         color: $clr-quinary;
         cursor: pointer;
-        opacity:1;
+        opacity: 1;
 
-        &--end{
+        &--end {
             opacity: .5;
         }
     }
 
     &__next {
-        right:5px;
+        right: 5px;
     }
 
     &__pause-txt {
