@@ -1,4 +1,4 @@
-![miniml](https://github.com/user-attachments/assets/6e5641d9-dfc4-4063-b765-7ebcfd2a60bf)
+![audio](https://github.com/user-attachments/assets/b05f10d7-a9f0-48c2-919a-73f0e8a939e4)
 
 ![Static Badge](https://img.shields.io/badge/Vue-3.5.13-green) 
 
@@ -87,7 +87,7 @@ To be able to play mp3 files from S3 without running into CORS restrictions, you
     }
 ]
 ```
-
+git 
 #### The path to your tracks will then be: https://{YOUR BUCKET NAME}.amazonaws.com 🔥
 
 Alternatively, research how to use a signed URL to protect access...
