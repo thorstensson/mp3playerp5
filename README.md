@@ -1,4 +1,4 @@
-![audio](https://github.com/user-attachments/assets/b05f10d7-a9f0-48c2-919a-73f0e8a939e4)
+![audio](https://github.com/user-attachments/assets/55e82bbf-03d5-44d8-bd5d-bf2a737ba435)
 
 ![Static Badge](https://img.shields.io/badge/Vue-3.5.13-green) 
 
@@ -100,7 +100,7 @@ Alternatively, research how to use a signed URL to protect access...
 
 - [X] Move all Web Audio API stuff into the SpectrumVisualizer.
 
-- [ ] Consider how to best do the freestanding visualizer component which should be able to live anywhere in the DOM tree. (When I tick this one off; watch for a new repo)
+- [ ] Consider how to best do the freestanding visualizer component which should be able to live anywhere in the DOM tree. (When I tick this one off; watch for a new repo).git
 
 ## Contributing
 
