@@ -1,12 +1,12 @@
-import { shallowRef, toRef, type ShallowRef } from "vue";
-import type { Ref } from "vue";
+import { shallowRef, toRef, type ShallowRef } from 'vue'
+import type { Ref } from 'vue'
 
 const store: Ref<Record<string, ShallowRef<HTMLElement | null>>> = shallowRef({})
 
 export const useStoreRef = () => {
 
     const addElem = (key: string, el: ShallowRef<HTMLElement | null>) => {
-        store.value[key] = el;
+        store.value[key] = el
     }
 
     const getElem = (key: string) => {
@@ -14,7 +14,7 @@ export const useStoreRef = () => {
         return { sRef }
     }
 
-    return { addElem, getElem };
+    return { addElem, getElem }
 }
 
 

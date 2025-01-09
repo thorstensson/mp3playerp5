@@ -1,47 +1,16 @@
 /* My Earth II palette (Coloors)*/
-$clr-primary: #000102; // bg
-$clr-secondary: #f6fbfe; // font
-$clr-tertiary: #df3815;
-$clr-quarternary: #f09e30;
-$clr-quinary: #ffc300;
-$clr-senary: #f09e305c;
+$clr-primary: #000814; // bg
+$clr-secondary: #f8f9fa; // font
+$clr-tertiary: #576f72;
+$clr-quarternary: #72983c;
+$clr-quinary: #67d360;
 
 /* Variable font paragraphs and headings */
-$sans-text: "objektiv-variable", sans-serif;
-$sans-text-wght: 450;
-$sans-text-style: normal;
-$sans-text-display: swap;
-$sans-text-variation-reg: "wght" 400;
-$sans-text-variation-md: "wght" 500;
-$sans-text-variation-semibd: "wght" 600;
-$sans-text-variation-bd: "wght" 700;
-$sans-text-variation-xbd: "wght" 800;
-$sans-text-variation-black: "wght" 900;
+$sans-text: "Plus Jakarta Sans", serif;
+$sans-text-optic:auto;
 
-$sans-ui: "dorival-ui-variable", sans-serif;
-$sans-ui-wght: 400;
-$sans-ui-style: normal;
-$sans-ui-display: swap;
-$sans-ui-variation-reg:
-    "slnt" 0,
-    "wdth" 100,
-    "wght" 400;
-$sans-ui-variation-md:
-    "slnt" 0,
-    "wdth" 100,
-    "wght" 500;
-$sans-ui-variation-cond-reg:
-    "slnt" 0,
-    "wdth" 80,
-    "wght" 400;
-$sans-ui-variation-cond-md:
-    "slnt" 0,
-    "wdth" 80,
-    "wght" 500;
-
-$sans-head: "bebas-neue", sans-serif;
-$sans-head-wght: 400;
-$sans-head-style: normal;
+$sans-ui: "DM Sans", serif;
+$sans-ui-optic:auto;
 
 /* Sizes, might get away with font clamp mixin for most body stuff though */
 $h1: 80px;

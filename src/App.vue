@@ -9,8 +9,6 @@ import NoiseBackgroundFx from './components/NoiseBackgroundFx.vue';
     <MinimlAudioPlayer />
     <WhatAbout>
       <template #title>Miniml Vue Audio Player</template>
-      <template #text>Vue 3.5 / TypeScript / Web Audio API / Santa</template>
-      <template #link><a target='_blank' href='https://github.com/thorstensson'>GitHub</a><br></template>
     </WhatAbout>
     <NoiseBackgroundFx />
   </div>

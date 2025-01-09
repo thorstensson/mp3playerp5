@@ -46,6 +46,8 @@ Start the server
 ```
 ## Suggested S3 config (if you're ok with a public S3 bucket)
 
+For the moment I'm'using S3 for the mp3 files. But play well and don't reuse my S3, if you somehow navigated to here :sunglasses: Mine is set to 0 budget, and I will soon store the tracks elsewhere. 
+
 To be able to play mp3 files from S3 without running into CORS restrictions, you need to configure the S3 bucket and its CORS policy. Login to your AWS, click on your bucket, then click on permissions and scroll down. Then add
 
 ### Bucket Policy
