@@ -10,7 +10,6 @@ import NoiseBackgroundFx from './components/NoiseBackgroundFx.vue';
     <WhatAbout>
       <template #title>Miniml Vue Audio Player</template>
     </WhatAbout>
-    <NoiseBackgroundFx />
   </div>
 </template>
 
