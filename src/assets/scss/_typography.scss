@@ -1,0 +1,14 @@
+@use "variables";
+
+.sans-ui {
+    font-family: variables.$sans-ui;
+    font-weight: variables.$sans-ui-wgt;
+    font-style: variables.$sans-ui-stl;
+}
+
+.sans-text {
+    font-family: variables.$sans-text;
+    font-optical-sizing: variables.$sans-text-opt;
+    font-weight: variables.$sans-text-wgt;
+    font-style: variables.$sans-text-stl;
+}

@@ -8,7 +8,7 @@ import NoiseBackgroundFx from './components/NoiseBackgroundFx.vue';
   <div class="app-wrapper">
     <MinimlAudioPlayer />
     <WhatAbout>
-      <template #title>Miniml Vue Audio Player</template>
+      <template #title>Audio.</template>
     </WhatAbout>
   </div>
 </template>
@@ -16,7 +16,7 @@ import NoiseBackgroundFx from './components/NoiseBackgroundFx.vue';
 <style lang="scss">
 html,
 body {
-  background-color: $clr-primary;
+  background-color: $primary;
   margin: 0;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;

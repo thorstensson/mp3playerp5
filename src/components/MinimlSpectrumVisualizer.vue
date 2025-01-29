@@ -3,6 +3,7 @@ import { ref, useTemplateRef, onMounted } from 'vue'
 import { useEventListener } from '@vueuse/core'
 import { useStoreRef } from '@/composable/useStoreRef'
 
+
 const canvas = useTemplateRef<HTMLCanvasElement>('canvas')
 const analyser = ref<AnalyserNode>()
 
@@ -18,9 +19,8 @@ const { getElem } = useStoreRef()
 const { sRef: audioEl } = getElem('audioEl')
 
 /**
- * Use web audio API to get the total number of data points
- * available to the AudioContext sampleRate.
- * I could not make this method a composable, can't see how when on mouse down is needed first (async, await?)
+ * Use web audio API to get the total number of data points available
+ * to the AudioContext sampleRate.
  */
 const createAnalyserData = () => {
   audioCtx = new AudioContext()
@@ -29,36 +29,42 @@ const createAnalyserData = () => {
   analyser.value = audioCtx.createAnalyser()
   audioSrc.connect(analyser.value)
   analyser.value.connect(audioCtx.destination)
-  analyser.value.fftSize = 128
+  analyser.value.fftSize = 64
 
   bufferLength = analyser.value.frequencyBinCount
   dataArray = new Uint8Array(bufferLength)
 
+
   if (audioCtx.state === 'suspended') {
     audioCtx.resume()
   }
-  barWidth = (canvas.value!.width / bufferLength)
+  barWidth = 10
+
 }
 
 /**
- * Animate bars based on Uint8 Array
+ * MDN: The getByteFrequencyData() method of the AnalyserNode interface copies
+ * the current frequency data into a Uint8Array (unsigned byte array) passed into it.
+ * The frequency data is composed of integers on a scale from 0 to 255.
+ * Each item in the array represents the decibel value for a specific frequency.
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/getByteFrequencyData|MDN}
  */
 const startAnimRequest = () => {
-  function doBars() {
-    let x = 0
+  function draw() {
+    let x = 5
     if (canvas.value && ctx) {
       ctx.clearRect(0, 0, canvas.value.width, canvas.value.height)
       analyser.value?.getByteFrequencyData(dataArray)
       for (let i = 0; i < bufferLength; i++) {
         const barHeight = dataArray[i]
-        ctx.fillStyle = "#000102"
+        ctx.fillStyle = `rgb(${barHeight + 100} 200 150)`;
         ctx.fillRect(x, canvas.value.height - barHeight, barWidth, barHeight)
         x += barWidth + 1
       }
     }
-    myReq = requestAnimationFrame(doBars)
+    myReq = requestAnimationFrame(draw)
   }
-  myReq = requestAnimationFrame(doBars)
+  draw()
 }
 
 const cancelAnimRequest = () => {

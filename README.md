@@ -10,9 +10,11 @@
 
 I've been researching the Web Audio API over the 'holidays', thus the birth of this little Audio Player. The player's spectrum bar reflects an array of sample rate data points.
 
-The playlist is virtual, and will probably stay so. I currently store the tracks in my S3 Amazon bucket (please don't re-use this bucket as it is set to public). But if you clone this, and you don't want to bother with S3, then just update the PATH variable in MinimlAudioPlayer to point to @/assets/audio, then drop some mp3's in there and play on localhost.
+This player uses a .env file for the URL (no longer on AWS). Thus, such .env vars are, of course, visible :eyes: client-side, even if the .env file is not on GitHub.
 
-On the roadmap: to write a freestanding (can live anywhere in the DOM tree) spectrum visualiser which generates colourful patterns on a larger HTML canvas. 🎅
+I might later on do a Nuxt version where audio is fetched server-side, but if you use AWS or some other host, I would recommend restricting the policy to the domain you own—if you don't want public access.
+
+For now have to get on with my portfolio and some other stuff coming on new repos in 2025 and leave audio as is, as it was not my intention to get so busy with audio context in 2025, albeit fun :penguin:
 
 ## Demo
 

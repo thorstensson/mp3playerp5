@@ -18,9 +18,8 @@ const slots = useSlots();
 <style scoped lang="scss">
 .title {
   font-family: $sans-text;
-  font-optical-sizing: $sans-text-optic;
-  color: $clr-secondary;
-  font-size: 20px;
+  color: $secondary;
+  font-size: 100px;
   margin-top: 20px;
   user-select: none;
 }
@@ -28,8 +27,7 @@ const slots = useSlots();
 .text,
 .link {
   font-family: $sans-text;
-  font-optical-sizing: $sans-text-optic;
-  color: $clr-secondary;
+  color: $secondary;
   font-size: 12px;
 }
 

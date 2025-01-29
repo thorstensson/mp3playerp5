@@ -20,7 +20,7 @@ const currentTrack = ref<string>("")
 const isPlaying = ref<boolean>(false)
 
 // Add mp3 path here, note if you are testing on Vite with localhost metadata events wont fire (next , previous)
-const PATH = "https://audio-tt.s3.amazonaws.com"
+const PATH = import.meta.env.VITE_MP3_URL
 
 // The panel width, if track text wider then GSAP yoyo
 const TRACK_WIDTH = 160
@@ -240,7 +240,6 @@ body {
 
 .player-wrapper * {
   font-family: $sans-ui;
-  font-optical-sizing: $sans-ui-optic;
   font-size: 12px;
   font-weight: 600;
 }
@@ -248,9 +247,9 @@ body {
 .panel {
   display: flex;
   justify-content: center;
-  color: $clr-secondary;
+  color: $primary;
   height: 100%;
-  background-color: $clr-secondary;
+  background-color: $secondary;
   border-radius: 25px;
 
   &__box {
@@ -261,7 +260,7 @@ body {
     border-radius: 4px;
     padding: 0 5px 0 5px;
     overflow: hidden;
-    background-color: $clr-tertiary;
+    background-color: $shade1;
     user-select: none;
 
     &__track {
@@ -274,7 +273,7 @@ body {
     }
 
     &__track--paused {
-      color: $clr-quinary;
+      color: $secondary;
     }
   }
 }
@@ -284,7 +283,7 @@ body {
   top: 0;
   height: inherit;
   width: inherit;
-  color: $clr-primary;
+  color: $primary;
   user-select: none;
 
   &__current {
@@ -329,7 +328,7 @@ body {
 
     &__filled {
       height: 4px;
-      background: $clr-primary;
+      background: $primary;
       flex: 0;
       flex-basis: 0%;
       border-radius: 25px;
@@ -353,7 +352,7 @@ body {
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    color: $clr-primary;
+    color: $shade1;
     cursor: pointer;
     transition: color 0.3s ease-in-out;
 
@@ -366,7 +365,7 @@ body {
   &__play:focus,
   &__pause:hover,
   &__pause:active {
-    color: $clr-tertiary;
+    color: $accent;
   }
 
   &__prev,
@@ -377,7 +376,7 @@ body {
     right: 25px;
     top: 50%;
     transform: translateY(-50%);
-    color: $clr-primary;
+    color: $shade1;
     cursor: pointer;
     opacity: 1;
     transition: color 0.3s ease-in-out;
@@ -395,14 +394,14 @@ body {
   &__next:focus,
   &__prev:hover,
   &__prev:active {
-    color: $clr-tertiary;
+    color: $accent;
   }
 
   &__pause-txt {
     position: relative;
     top: 45px;
     opacity: 0;
-    color: $clr-primary;
+    color: $primary;
     transition: opacity 0.3s ease-in;
     user-select: none;
 
