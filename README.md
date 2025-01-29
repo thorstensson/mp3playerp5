@@ -1,4 +1,4 @@
-![audio](https://github.com/user-attachments/assets/c2b8ac48-c51d-4625-aa74-1ec91ee563e7)
+![Image](https://github.com/user-attachments/assets/6c58b769-0003-4897-8625-409a09d958ce)
 
 ![Static Badge](https://img.shields.io/badge/Vue-3.5.13-green) 
 
