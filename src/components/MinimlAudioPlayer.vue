@@ -27,9 +27,12 @@ const TRACK_WIDTH = 160
 
 //Add tracks here; no plans to make a DOM playlist
 const playlist = reactive([
-  { artist: "Ernes Guevara", track: "Ernes Guevara - Lost (Original Mix).mp3" },
-  { artist: "Stockholm Syndrome, Young Squage", track: "EMPHI - Stockholm Syndrome (Original Mix).mp3" },
-  { artist: "EMPHI", track: "EMPHI - Pair of Dice (Original Mix).mp3" }
+
+    { artist: "Oneheart", track: "Øneheart, Antent, Dean Korso - silence is speaking.mp3" },
+
+    { artist: "Ashess", track: "ashess - she is the moment.mp3" },
+
+    { artist: "Shibíre", track: "shibíre - Hometown.mp3" },
 ])
 
 // Check for remaining tracks
