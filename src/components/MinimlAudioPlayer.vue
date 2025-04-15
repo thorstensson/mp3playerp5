@@ -28,11 +28,12 @@ const TRACK_WIDTH = 160
 //Add tracks here; no plans to make a DOM playlist
 const playlist = reactive([
 
-    { artist: "Oneheart", track: "Øneheart, Antent, Dean Korso - silence is speaking.mp3" },
+  { artist: "Lorn", track: "Lorn - Folding (Original Mix).mp3" },
 
-    { artist: "Ashess", track: "ashess - she is the moment.mp3" },
+  { artist: "ashess", track: "ashess - only you (Original Mix).mp3" },
 
-    { artist: "Shibíre", track: "shibíre - Hometown.mp3" },
+  { artist: "Sky_s Memoirs", track: "Sky_s Memoirs - Nova (Original Mix).mp3" }
+
 ])
 
 // Check for remaining tracks
@@ -226,12 +227,6 @@ onMounted(() => {
   font-size: 20px;
 }
 
-body {
-  -webkit-overflow-scrolling: none;
-  overflow: hidden;
-  overscroll-behavior: none;
-}
-
 .player-wrapper {
   position: relative;
   width: 280px;
@@ -244,13 +239,13 @@ body {
 .player-wrapper * {
   font-family: $sans-ui;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .panel {
   display: flex;
   justify-content: center;
-  color: $primary;
+  color: $accent1;
   height: 100%;
   background-color: $secondary;
   border-radius: 25px;
@@ -263,7 +258,7 @@ body {
     border-radius: 4px;
     padding: 0 5px 0 5px;
     overflow: hidden;
-    background-color: $shade1;
+    background-color: rgba(204, 197, 185, 0.23);
     user-select: none;
 
     &__track {
@@ -320,7 +315,7 @@ body {
     top: 30px;
     height: 4px;
     width: 200px;
-    background: #dddddd;
+    background: $accent2;
     border-radius: 25px;
     margin: 0 5px;
     /* flex: 10; */
@@ -355,7 +350,7 @@ body {
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    color: $shade1;
+    color: $accent2;
     cursor: pointer;
     transition: color 0.3s ease-in-out;
 
@@ -368,7 +363,7 @@ body {
   &__play:focus,
   &__pause:hover,
   &__pause:active {
-    color: $accent;
+    color: $accent1;
   }
 
   &__prev,
@@ -379,7 +374,7 @@ body {
     right: 25px;
     top: 50%;
     transform: translateY(-50%);
-    color: $shade1;
+    color: $accent2;
     cursor: pointer;
     opacity: 1;
     transition: color 0.3s ease-in-out;
@@ -397,7 +392,7 @@ body {
   &__next:focus,
   &__prev:hover,
   &__prev:active {
-    color: $accent;
+    color: $accent1;
   }
 
   &__pause-txt {

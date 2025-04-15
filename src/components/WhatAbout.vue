@@ -22,6 +22,7 @@ const slots = useSlots();
   font-size: 100px;
   margin-top: 20px;
   user-select: none;
+  font-weight: 600;
 }
 
 .text,
