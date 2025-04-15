@@ -1,14 +1,8 @@
-![Image](https://github.com/user-attachments/assets/6c58b769-0003-4897-8625-409a09d958ce)
-
-![Static Badge](https://img.shields.io/badge/Vue-3.5.13-green) 
-
-![Static Badge](https://img.shields.io/badge/Typescript-5.6.3-navy)
-
-![Static Badge](https://img.shields.io/badge/Composition%20API-orange)
+![Static Badge](https://img.shields.io/badge/Vue-3.5.13-green)  ![Static Badge](https://img.shields.io/badge/Typescript-5.6.3-navy)  ![Static Badge](https://img.shields.io/badge/Composition%20API-orange)
 
 # Audio Player - Vue - TS - Web Audio API
 
-I've been researching the Web Audio API over the 'holidays', thus the birth of this little Audio Player. The player's spectrum bar reflects an array of sample rate data points.
+I've been researching the Web Audio API over the 'holidays', thus the birth of this little Audio Player. The player's spectrum bar reflects an array of sample rate data points :penguin:
 
 ## Demo
 
