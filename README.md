@@ -10,7 +10,7 @@ Another dive into the Web Audio API. This mp3 player has a (reactive) playlist a
 :penguin: T.
 ## Demo
 
-👉 Netlify: https://mp3player.thomasthorstensson.com
+👉 Netlify: https://mp3playerp5.thomasthorstensson.com
 
 ## Tech Stack
 
@@ -25,7 +25,7 @@ Another dive into the Web Audio API. This mp3 player has a (reactive) playlist a
 Clone the project
 
 ```bash
-  git clone https://github.com/thorstensson/mp3player.git
+  git clone https://github.com/thorstensson/mp3playerp5.git
 ```
 
 Go to the project directory
