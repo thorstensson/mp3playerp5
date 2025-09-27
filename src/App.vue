@@ -1,16 +1,9 @@
 <script setup lang="ts">
-import MinimlAudioPlayer from '@/components/MinimlAudioPlayer.vue'
-import WhatAbout from '@/components/WhatAbout.vue';
-import NoiseBackgroundFx from './components/NoiseBackgroundFx.vue';
+import ViewDemoPage from "@/components/view/ViewDemoPage.vue"
 </script>
 
 <template>
-  <div class="app-wrapper">
-    <MinimlAudioPlayer />
-    <WhatAbout>
-      <template #title>Audio.</template>
-    </WhatAbout>
-  </div>
+  <ViewDemoPage />
 </template>
 
 <style lang="scss">
@@ -22,20 +15,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   -o-font-smoothing: antialiased;
-  -webkit-overflow-scrolling: none;
-  overflow: hidden;
   overscroll-behavior: none;
 }
 
 body {
   min-height: 100vh;
-}
-
-.app-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
 }
 </style>

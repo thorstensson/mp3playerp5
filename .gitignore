@@ -11,7 +11,7 @@ node_modules
 .DS_Store
 dist
 dist-ssr
-coverage
+coverage 
 *.local
 
 /cypress/videos/
@@ -31,3 +31,7 @@ coverage
 
 *.env
 .env
+
+# Windows system files
+*.ini
+Desktop.ini

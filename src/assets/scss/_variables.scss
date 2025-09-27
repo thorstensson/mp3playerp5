@@ -1,37 +1,19 @@
-// Colors, created with ColorSpace, now settled 
-$primary: #f4f3ee; // bg
-$secondary: #252422; // font
-$accent1:#eb5e28;
-$accent2:#ccc5b9;
+// Colors, created with ColorSpace, now settled
+
+$primary: #171717;
+$secondary: #faf7ff;
+$accent1: #4d585f;
+$accent2: #84a6a5;
+$accent3: #1e1e1e;
 
 // Fonts
-$sans-ui: "Space Mono", sans-serif;
+$sans-ui: "Sora", sans-serif;
 $sans-ui-opt: auto;
 $sans-ui-wgt: 600;
 $sans-ui-stl: normal;
 
-$sans-text: "Space Grotesk", sans-serif;
+$sans-text: "Geist Mono", monospace;
 $sans-text-opt: auto;
 $sans-text-wgt: 500;
 $sans-text-stl: normal;
 
-// Sizes
-$h1: 80px;
-$h1-lg: 100px;
-$h1-xl: 140px;
-$h1-xxl: 160px;
-
-// Padding
-$page-hpad: 20px;
-$page-hpad-lg: 60px;
-$page-hpad-xl: 60px;
-$page-hpad-xxl: 70px;
-
-$page-vpad: 20px;
-$page-vpad-lg: 300px;
-$page-vpad-xl: 300px;
-$page-vpad-xxl: 460px;
-
-$roffset-lg:150px;
-$roffset-xl:300px;
-$roffset-xxl:500px;

@@ -1,20 +1,31 @@
-![Static Badge](https://img.shields.io/badge/Vue-3.5.13-green)  ![Static Badge](https://img.shields.io/badge/Typescript-5.6.3-navy)  ![Static Badge](https://img.shields.io/badge/Composition%20API-orange)
+<img width="600" height="600" alt="Image" src="https://github.com/user-attachments/assets/f5aec123-49bb-4072-9f9c-aebe12e26f6c" />
 
-# Audio Player - Vue - TS - Web Audio API
+<br/>
+<br/>
 
-I've been researching the Web Audio API over the 'holidays', thus the birth of this little Audio Player. The player's spectrum bar reflects an array of sample rate data points :penguin:
+# MP3 Player
 
+Another dive into the Web Audio API. This mp3 player has a (reactive) playlist and a sinus spectrum visualizer.
+
+:penguin: T.
 ## Demo
 
-👉 Netlify: https://minimlaudio.netlify.app/ 
+👉 Netlify: https://mp3player.thomasthorstensson.com
 
+## Tech Stack
+
+- Vue 3
+- Typescript
+- Web Audio API
+- S3
+- P5.js
 
 ## Run Locally
 
 Clone the project
 
 ```bash
-  git clone https://github.com/thorstensson/audio-player-vue-ts.git
+  git clone https://github.com/thorstensson/mp3player.git
 ```
 
 Go to the project directory
@@ -35,10 +46,6 @@ Start the server
   npm run dev
 ```
 ## Suggested S3 config (if you're ok with a public S3 bucket)
-
-For the moment I'm'using S3 for the mp3 files. But play well and don't reuse my S3, if you somehow navigated to here :sunglasses:  
-
-To be able to play mp3 files from S3 without running into CORS restrictions, you need to configure the S3 bucket and its CORS policy. Login to your AWS, click on your bucket, then click on permissions and scroll down. Then add
 
 ### Bucket Policy
 ```json
@@ -81,16 +88,6 @@ To be able to play mp3 files from S3 without running into CORS restrictions, you
 ```
 git 
 #### The path to your tracks will then be: https://{YOUR BUCKET NAME}.amazonaws.com 🔥
-
-Alternatively, research how to use a signed URL to protect access...
-
-## Roadmap
-
-- [X] Fix automatic playback.
-
-- [X] Leave volume to users device control and add instead next and previous buttons to UI.
-
-- [X] Move all Web Audio API stuff into the SpectrumVisualizer.
 
 ## Contributing
 
