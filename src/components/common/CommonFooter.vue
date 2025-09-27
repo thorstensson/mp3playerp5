@@ -7,7 +7,7 @@ import CommonFooterLayout from "@/components/common/CommonFooterLayout.vue"
     <CommonFooterLayout>
       <template #info> Vue3 + S3 + Web Audio API + P5.js </template>
       <template #link
-        ><a href="https://github.com/thorstensson/mp3player" target="_blank"
+        ><a href="https://github.com/thorstensson/mp3playerp5" target="_blank"
           >GitHub repo</a
         ></template
       >

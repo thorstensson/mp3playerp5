@@ -359,7 +359,7 @@ onMounted(() => {
   top: 2px;
   height: inherit;
   width: inherit;
-  color: $primary;
+  color: $accent2;
   user-select: none;
 
   &__current {
