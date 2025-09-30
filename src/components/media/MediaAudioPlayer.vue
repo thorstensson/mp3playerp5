@@ -19,7 +19,6 @@ import {
 
 import MinimlSpectrumVisualizer from "./MediaAudioVisualizer.vue"
 import MediaPlaylist from "./MediaPlaylist.vue"
-
 const spectrum = useTemplateRef("spectrum")
 const audioEl = useTemplateRef("audio-element")
 const progressBar = useTemplateRef("progress-bar")

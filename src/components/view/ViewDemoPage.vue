@@ -3,6 +3,7 @@ import { ref, onMounted } from "vue"
 import { gsap } from "gsap"
 import CommonFooter from "@/components/common/CommonFooter.vue"
 import MediaAudioPlayer from "@/components/media/MediaAudioPlayer.vue"
+import { HeadphonesIcon } from "@sidekickicons/vue/24/solid"
 
 const showIntro = ref(true)
 
@@ -14,7 +15,7 @@ onMounted(() => {
 
   tl
     // Animate intro text in
-    .from(".intro-text", {
+    .from(".intro-icon", {
       duration: 1,
       opacity: 0,
       y: 50,
@@ -23,7 +24,7 @@ onMounted(() => {
     // Hold for a moment
     .to({}, { duration: 1.5 })
     // Fade out intro text
-    .to(".intro-text", {
+    .to(".intro-icon", {
       duration: 0.8,
       opacity: 0,
       y: -30,
@@ -44,7 +45,7 @@ onMounted(() => {
 <template>
   <div class="page-container">
     <div class="lab-wrapper">
-      <div v-if="showIntro" class="intro-text">MP3PLAYER</div>
+      <div v-if="showIntro" class="intro-icon"><HeadphonesIcon /></div>
 
       <div class="player-container">
         <MediaAudioPlayer />
@@ -73,13 +74,10 @@ onMounted(() => {
   min-height: calc(100dvh - 50px);
 }
 
-.intro-text {
+.intro-icon {
+  width: 100px;
+  height: 100px;
   color: $accent1;
-  font-family: $sans-text;
-  font-size: clamp(60px, 8vw, 120px);
-  font-weight: 600;
-  text-align: center;
-  letter-spacing: 0.1em;
   user-select: none;
 }
 </style>

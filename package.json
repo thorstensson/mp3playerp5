@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@heroicons/vue": "^2.2.0",
+    "@sidekickicons/vue": "^0.14.0",
     "@vueuse/core": "^12.2.0",
     "gsap": "^3.12.5",
     "p5": "^2.0.5",
