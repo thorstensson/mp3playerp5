@@ -62,6 +62,14 @@ onMounted(() => {
   min-height: 100vh;
   /* Using dynamic viewport height for better mobile support */
   min-height: 100dvh;
+
+  background: repeating-linear-gradient(
+    45deg,
+    $primary,
+    $primary 20px,
+    $accent3 21px,
+    $accent3 22px
+  );
 }
 
 .lab-wrapper {

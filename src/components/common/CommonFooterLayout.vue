@@ -12,14 +12,14 @@ const slots = useSlots()
 </template>
 
 <style scoped lang="scss">
-
 .info {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  font-family: $sans-text;
+  font-family: $sans-ui;
+  font-weight: $sans-ui-wgt;
   font-size: clamp-calc(480px, 1920px, 12px, 14px);
-  color: $accent2;
+  color: $accent1;
   user-select: none;
 }
 </style>

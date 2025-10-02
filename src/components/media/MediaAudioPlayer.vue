@@ -431,6 +431,10 @@ onMounted(() => {
     cursor: pointer;
     transition: color 0.3s ease-in-out;
 
+    /* Prevent focus outline on touch devices */
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+
     &--show {
       display: block;
     }
@@ -455,6 +459,10 @@ onMounted(() => {
     cursor: pointer;
     opacity: 1;
     transition: color 0.3s ease-in-out;
+
+    /* Prevent focus outline on touch devices */
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 
     &--end {
       opacity: 0.5;
