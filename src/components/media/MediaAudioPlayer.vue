@@ -311,7 +311,7 @@ onMounted(() => {
 
 .player-wrapper * {
   font-family: $sans-text;
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 400;
 }
 

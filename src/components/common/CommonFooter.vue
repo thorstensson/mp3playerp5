@@ -1,17 +1,23 @@
 <script setup lang="ts">
-import CommonFooterLayout from "@/components/common/CommonFooterLayout.vue"
+interface Props {
+  info: string
+  link: string
+  linkLabel: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  info: "Thomas Thorstensson",
+  link: "https://github.com/thorstensson",
+  linkLabel: "GitHub",
+})
 </script>
 
 <template>
-  <div class="footer-wrapper">
-    <CommonFooterLayout>
-      <template #info> Vue3 + S3 + Web Audio API + P5.js </template>
-      <template #link
-        ><a href="https://github.com/thorstensson/mp3playerp5" target="_blank"
-          >GitHub repo</a
-        ></template
-      >
-    </CommonFooterLayout>
+  <div class="footer">
+    {{ props.info }} &nbsp;
+    <a :href="props.link" target="_blank" rel="noopener noreferrer">{{
+      props.linkLabel
+    }}</a>
   </div>
 </template>
 
@@ -19,19 +25,23 @@ import CommonFooterLayout from "@/components/common/CommonFooterLayout.vue"
 a {
   text-decoration: underline;
 }
-.footer-wrapper {
+.footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   height: 50px;
   padding: 0 32px;
-  flex-shrink: 0; /* Prevent footer from shrinking */
+  flex-shrink: 0;
+  font-family: $sans-ui;
+  font-weight: 400;
+  font-variation-settings: "wght" 400;
+  font-size: clamp-calc(480px, 1920px, 12px, 14px);
+  color: $secondary;
+  transition: color 0.2s ease-in-out;
+  cursor: pointer;
+}
 
-  // Ensure footer is always visible on mobile
-  @media (max-width: 768px) {
-    position: relative;
-    z-index: 100;
-    background-color: $primary;
-  }
+.footer:hover {
+  color: $accent1;
 }
 </style>

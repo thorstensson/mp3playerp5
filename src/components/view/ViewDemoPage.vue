@@ -51,7 +51,11 @@ onMounted(() => {
         <MediaAudioPlayer />
       </div>
     </div>
-    <CommonFooter />
+    <CommonFooter
+      info="© 2025 Thomas Thorstensson •"
+      link="https://github.com/thorstensson"
+      linkLabel="GitHub"
+    />
   </div>
 </template>
 

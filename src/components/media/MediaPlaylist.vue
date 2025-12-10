@@ -91,7 +91,7 @@ const selectTrack = (index: number) => {
     padding: 4px 0;
     border-bottom: 1px solid $accent1;
     margin-bottom: 6px;
-    font-size: 8px;
+    font-size: 9px;
     letter-spacing: 1px;
   }
 
@@ -141,7 +141,7 @@ const selectTrack = (index: number) => {
     min-width: 20px;
     color: $accent1;
     margin-right: 8px;
-    font-size: 8px;
+    font-size: 9px;
   }
 
   &__track-info {
@@ -149,7 +149,7 @@ const selectTrack = (index: number) => {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 8px;
+    font-size: 9px;
   }
 }
 </style>
