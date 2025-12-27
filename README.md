@@ -17,7 +17,7 @@ Another dive into the Web Audio API. This mp3 player has a (reactive) playlist a
 - Vue 3
 - Typescript
 - Web Audio API
-- S3
+- Cloudflare R2
 - P5.js
 
 ## Run Locally
