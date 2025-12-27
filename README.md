@@ -100,6 +100,4 @@ Contributions are always welcome!
 ## More on the Web Audio API
 
  - [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API)
- - [Web Audio API - Book/Amazon](https://www.amazon.com/Web-Audio-API-Advanced-Interactive/dp/1449332684)
-
 
