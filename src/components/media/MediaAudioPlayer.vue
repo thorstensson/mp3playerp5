@@ -216,7 +216,7 @@ onMounted(() => {
 <template>
   <div class="player-wrapper">
     <audio
-      :src="`${PATH}/${currentTrack}`"
+      :src="`${PATH}/mp3/${currentTrack}`"
       type="audio/mp3"
       preload="auto"
       v-on:timeupdate="timeUpdate"
