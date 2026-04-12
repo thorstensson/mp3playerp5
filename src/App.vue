@@ -19,6 +19,7 @@ body {
 }
 
 body {
+  font-family: "Inter Variable", sans-serif;
   min-height: 100vh;
 }
 </style>

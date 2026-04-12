@@ -5,9 +5,12 @@
 
 # MP3 Player
 
-Another dive into the Web Audio API. This mp3 player has a (reactive) playlist and a sinus spectrum visualizer.
+Another dive into the Web Audio API. Audio hosted on Cloudflare. Spectrum visualizer (sine curve) is based on audio bits read from Uint8Array of the frequency count from the audio analyser, and then plugged into P5.JS for visuals.
+
+## TODO: Make this a Progressive Web App. But other new projects have priority!
 
 :penguin: T.
+
 ## Demo
 
 👉 Netlify: https://mp3playerp5.thomasthorstensson.com
@@ -45,48 +48,43 @@ Start the server
 ```bash
   npm run dev
 ```
+
 ## Suggested S3 config (if you're ok with a public S3 bucket)
 
 ### Bucket Policy
+
 ```json
 {
-    "Version": "2008-10-17",
-    "Statement": [
-        {
-            "Sid": "AllowPublicRead",
-            "Effect": "Allow",
-            "Principal": {
-                "AWS": "*"
-            },
-            "Action": "s3:GetObject",
-            "Resource": "arn:aws:s3:::{YOUR BUCKET NAME HERE}/*"
-        }
-    ]
+  "Version": "2008-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowPublicRead",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "*"
+      },
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::{YOUR BUCKET NAME HERE}/*"
+    }
+  ]
 }
 ```
 
 ### Cross-origin resource sharing (CORS)
+
 ```json
 [
-    {
-        "AllowedHeaders": [
-            "*"
-        ],
-        "AllowedMethods": [
-            "POST",
-            "GET",
-            "PUT",
-            "DELETE",
-            "HEAD"
-        ],
-        "AllowedOrigins": [
-            "*"
-        ],
-        "ExposeHeaders": []
-    }
+  {
+    "AllowedHeaders": ["*"],
+    "AllowedMethods": ["POST", "GET", "PUT", "DELETE", "HEAD"],
+    "AllowedOrigins": ["*"],
+    "ExposeHeaders": []
+  }
 ]
 ```
-git 
+
+git
+
 #### The path to your tracks will then be: https://{YOUR BUCKET NAME}.amazonaws.com 🔥
 
 ## Contributing
@@ -99,5 +97,4 @@ Contributions are always welcome!
 
 ## More on the Web Audio API
 
- - [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API)
-
+- [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API)

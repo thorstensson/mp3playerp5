@@ -25,7 +25,7 @@ const progressBar = useTemplateRef("progress-bar")
 const progressBarFilled = useTemplateRef("progress-bar-filled")
 const panelTrack = useTemplateRef("panel-track")
 
-// Provide audio element to child components
+// Provide audio element to child components—
 provide("audioElement", audioEl)
 
 const trackTime = ref<string>("00:00")

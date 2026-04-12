@@ -13,6 +13,8 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
+    "@fontsource-variable/geist-mono": "^5.2.7",
+    "@fontsource-variable/inter": "^5.2.8",
     "@heroicons/vue": "^2.2.0",
     "@sidekickicons/vue": "^0.14.0",
     "@vueuse/core": "^12.2.0",
@@ -34,6 +36,7 @@
     "eslint-plugin-vue": "^9.30.0",
     "jsdom": "^25.0.1",
     "npm-run-all2": "^7.0.1",
+    "oxlint": "^1.36.0",
     "sass-embedded": "^1.83.0",
     "typescript": "~5.6.3",
     "vite": "^6.0.1",

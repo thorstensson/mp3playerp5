@@ -52,9 +52,9 @@ onMounted(() => {
       </div>
     </div>
     <CommonFooter
-      info="© 2025 Thomas Thorstensson •"
-      link="https://github.com/thorstensson"
-      linkLabel="GitHub"
+      info=""
+      link="https://www.thomasthorstensson.com"
+      linkLabel="—.t"
     />
   </div>
 </template>
@@ -66,14 +66,6 @@ onMounted(() => {
   min-height: 100vh;
   /* Using dynamic viewport height for better mobile support */
   min-height: 100dvh;
-
-  background: repeating-linear-gradient(
-    45deg,
-    $primary,
-    $primary 20px,
-    $accent3 21px,
-    $accent3 22px
-  );
 }
 
 .lab-wrapper {
@@ -89,7 +81,7 @@ onMounted(() => {
 .intro-icon {
   width: 100px;
   height: 100px;
-  color: $accent1;
+  color: $secondary;
   user-select: none;
 }
 </style>

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import GitHubIcon from "@/components/common/GitHubIcon.vue"
+
 interface Props {
   info: string
   link: string
@@ -14,18 +16,22 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <div class="footer">
-    {{ props.info }} &nbsp;
-    <a :href="props.link" target="_blank" rel="noopener noreferrer">{{
-      props.linkLabel
-    }}</a>
+    <div class="github-icon"><GitHubIcon size="md" /></div>
+    <div>
+      {{ props.info }} &nbsp;
+      <a :href="props.link" target="_blank" rel="noopener noreferrer">{{
+        props.linkLabel
+      }}</a>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 a {
-  text-decoration: underline;
+  text-decoration: none;
 }
 .footer {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -41,7 +47,7 @@ a {
   cursor: pointer;
 }
 
-.footer:hover {
-  color: $accent1;
+.github-icon {
+  margin-top: 4px;
 }
 </style>
