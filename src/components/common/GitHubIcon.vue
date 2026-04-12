@@ -1,7 +1,38 @@
+<script setup lang="ts">
+import { computed } from "vue"
+
+defineOptions({
+  inheritAttrs: false, // 👈 Stop automatic inheritance
+})
+
+const props = defineProps({
+  size: {
+    type: String,
+    default: "md",
+    validator: (value: string) => ["sm", "md", "lg"].includes(value),
+  },
+  href: {
+    type: String,
+    default: "https://github.com/thorstensson/mp3playerp5",
+  },
+})
+
+const sizeClass = computed(() => {
+  switch (props.size) {
+    case "sm":
+      return "size-sm"
+    case "lg":
+      return "size-lg"
+    default:
+      return "size-md"
+  }
+})
+</script>
+
 <template>
   <a
     class="github-icon-button"
-    href="https://github.com/thorstensson/nasa-apod"
+    :href="href"
     target="_blank"
     rel="noopener noreferrer"
   >
@@ -33,33 +64,6 @@
     </svg>
   </a>
 </template>
-
-<script setup lang="ts">
-import { computed } from "vue"
-
-defineOptions({
-  inheritAttrs: false, // 👈 Stop automatic inheritance
-})
-
-const props = defineProps({
-  size: {
-    type: String,
-    default: "md",
-    validator: (value: string) => ["sm", "md", "lg"].includes(value),
-  },
-})
-
-const sizeClass = computed(() => {
-  switch (props.size) {
-    case "sm":
-      return "size-sm"
-    case "lg":
-      return "size-lg"
-    default:
-      return "size-md"
-  }
-})
-</script>
 
 <style lang="scss" scoped>
 .github-icon-button {

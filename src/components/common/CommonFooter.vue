@@ -9,7 +9,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   info: "Thomas Thorstensson",
-  link: "https://github.com/thorstensson",
+  link: "https://mp3playerp5.thomasthorstensson.com/",
   linkLabel: "GitHub",
 })
 </script>
