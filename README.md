@@ -7,7 +7,7 @@
 
 Another dive into the Web Audio API. Audio hosted on Cloudflare. Spectrum visualizer (sine curve) is based on audio bits read from Uint8Array of the frequency count from the audio analyser, and then plugged into P5.JS for visuals.
 
-## TODO: Make this a Progressive Web App. But other new projects have priority!
+## ✅ Now a Progressive Web App — installable to your device for offline playback.
 
 :penguin: T.
 

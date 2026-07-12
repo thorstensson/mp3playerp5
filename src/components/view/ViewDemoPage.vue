@@ -54,7 +54,7 @@ onMounted(() => {
     <CommonFooter
       info=""
       link="https://www.thomasthorstensson.com"
-      linkLabel="—.t"
+      linkLabel="PWA by Thomas"
     />
   </div>
 </template>

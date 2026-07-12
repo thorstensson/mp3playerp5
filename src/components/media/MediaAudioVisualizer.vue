@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, inject, onMounted, onUnmounted } from "vue"
 import { useEventListener } from "@vueuse/core"
-// @ts-expect-error - p5 types issue with package.json exports
+
 import p5 from "p5"
 import type { Ref } from "vue"
 

@@ -16,7 +16,6 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <div class="footer">
-    <div class="github-icon"><GitHubIcon size="md" /></div>
     <div>
       {{ props.info }} &nbsp;
       <a :href="props.link" target="_blank" rel="noopener noreferrer">{{

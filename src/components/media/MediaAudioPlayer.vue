@@ -224,6 +224,7 @@ onMounted(() => {
       v-on:ended="onTrackEnded"
       ref="audio-element"
       crossorigin="anonymous"
+      use
     ></audio>
     <div class="panel">
       <div class="panel__box">

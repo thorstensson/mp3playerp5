@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import ViewDemoPage from "@/components/view/ViewDemoPage.vue"
+import InstallButton from "@/components/common/InstallButton.vue"
 </script>
 
 <template>
+  <InstallButton />
   <ViewDemoPage />
 </template>
 
