@@ -15,6 +15,14 @@ Another dive into the Web Audio API. Audio hosted on Cloudflare. Spectrum visual
 
 👉 Netlify: https://mp3playerp5.thomasthorstensson.com
 
+## Testing
+
+```bash
+npx playwright test
+```
+
+Added 2026-07-26
+
 ## Tech Stack
 
 - Vue 3
@@ -22,6 +30,7 @@ Another dive into the Web Audio API. Audio hosted on Cloudflare. Spectrum visual
 - Web Audio API
 - Cloudflare R2
 - P5.js
+- Playwright
 
 ## Run Locally
 

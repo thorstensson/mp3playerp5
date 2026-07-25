@@ -47,6 +47,10 @@ const playlist = reactive([
   { artist: "ashess", track: "ashess - only you (Original Mix).mp3" },
 
   { artist: "Sky_s Memoirs", track: "Sky_s Memoirs - Nova (Original Mix).mp3" },
+
+  { artist: "Progmalite", track: "Progmalite - Statica (Single).mp3" },
+
+  { artist: "JUNØ", track: "JUNØ - Pressure.mp3" },
 ])
 
 // Check for remaining tracks

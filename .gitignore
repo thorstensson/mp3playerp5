@@ -39,3 +39,10 @@ nul
 CON
 PRN
 LPT1
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
