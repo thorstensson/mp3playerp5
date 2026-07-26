@@ -12,7 +12,9 @@ test.describe("MP3 Player", () => {
     })
 
     // Player controls are present
-    await expect(page.getByRole("button", { name: /play/i })).toBeVisible()
+    await expect(
+      page.getByRole("button", { name: "Play", exact: true }),
+    ).toBeVisible()
     await expect(page.getByRole("button", { name: /next/i })).toBeVisible()
     await expect(page.getByRole("button", { name: /previous/i })).toBeVisible()
 
