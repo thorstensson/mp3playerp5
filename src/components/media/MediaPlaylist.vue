@@ -35,7 +35,15 @@ const selectTrack = (index: number) => {
             :class="{
               'playlist-panel__track--current': index === currentTrackIndex,
             }"
+            role="button"
+            tabindex="0"
+            :aria-current="index === currentTrackIndex ? 'true' : undefined"
+            :aria-label="
+              'Play ' + track.artist + ' - ' + track.track.replace('.mp3', '')
+            "
             @click="selectTrack(index)"
+            @keydown.enter="selectTrack(index)"
+            @keydown.space.prevent="selectTrack(index)"
           >
             <span class="playlist-panel__track-number">{{
               String(index + 1).padStart(2, "0")

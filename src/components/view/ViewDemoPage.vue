@@ -45,7 +45,9 @@ onMounted(() => {
 <template>
   <div class="page-container">
     <div class="lab-wrapper">
-      <div v-if="showIntro" class="intro-icon"><HeadphonesIcon /></div>
+      <div v-if="showIntro" class="intro-icon" aria-hidden="true">
+        <HeadphonesIcon />
+      </div>
 
       <div class="player-container">
         <MediaAudioPlayer />

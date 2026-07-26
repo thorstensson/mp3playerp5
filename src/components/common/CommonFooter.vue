@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import GitHubIcon from "@/components/common/GitHubIcon.vue"
-
 interface Props {
   info: string
   link: string

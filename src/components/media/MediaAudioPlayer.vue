@@ -250,33 +250,51 @@ onMounted(() => {
       </div>
     </div>
     <div class="progress">
-      <div class="progress__bar" ref="progress-bar">
+      <div
+        class="progress__bar"
+        ref="progress-bar"
+        role="slider"
+        aria-label="Track progress"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        tabindex="0"
+      >
         <div class="progress__bar__filled" ref="progress-bar-filled"></div>
       </div>
     </div>
     <div class="controls">
-      <PlayIcon
+      <button
+        aria-label="Play"
         @click="togglePlay"
         class="controls__play"
         :class="{ 'controls__play--show': !isPlaying }"
-      />
-      <PauseIcon
+      >
+        <PlayIcon />
+      </button>
+      <button
+        aria-label="Pause"
         @click="togglePlay"
         class="controls__pause"
         :class="{ 'controls__pause--show': isPlaying }"
-      />
-      <ChevronLeftIcon
+      >
+        <PauseIcon />
+      </button>
+      <button
+        aria-label="Previous track"
         @click="prevTrack"
         class="controls__prev"
         :class="{ 'controls__prev--end': !ifTrackPrev }"
       >
-      </ChevronLeftIcon>
-      <ChevronRightIcon
+        <ChevronLeftIcon />
+      </button>
+      <button
+        aria-label="Next track"
         @click="nextTrack"
         class="controls__next"
         :class="{ 'controls__next--end': !ifTrackNext }"
       >
-      </ChevronRightIcon>
+        <ChevronRightIcon />
+      </button>
     </div>
     <div v-if="audioEl">
       <MinimlSpectrumVisualizer ref="spectrum" />
@@ -428,6 +446,9 @@ onMounted(() => {
     position: absolute;
     display: none;
     width: 28px;
+    border: none;
+    background: none;
+    padding: 0;
     height: auto;
     left: 16px;
     top: 50%;
@@ -464,6 +485,9 @@ onMounted(() => {
     cursor: pointer;
     opacity: 1;
     transition: color 0.3s ease-in-out;
+    border: none;
+    background: none;
+    padding: 0;
 
     /* Prevent focus outline on touch devices */
     -webkit-tap-highlight-color: transparent;

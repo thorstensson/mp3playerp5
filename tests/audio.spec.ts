@@ -12,9 +12,9 @@ test.describe("MP3 Player", () => {
     })
 
     // Player controls are present
-    await expect(page.locator(".controls__play")).toBeVisible()
-    await expect(page.locator(".controls__next")).toBeVisible()
-    await expect(page.locator(".controls__prev")).toBeVisible()
+    await expect(page.getByRole("button", { name: /play/i })).toBeVisible()
+    await expect(page.getByRole("button", { name: /next/i })).toBeVisible()
+    await expect(page.getByRole("button", { name: /previous/i })).toBeVisible()
 
     // Playlist is rendered
     await expect(page.locator(".playlist-panel")).toBeVisible()
@@ -56,19 +56,19 @@ test.describe("MP3 Player", () => {
     await expect(trackTitle).toContainText("Lorn")
 
     // Next
-    await page.locator(".controls__next").click()
+    await page.getByRole("button", { name: /next/i }).click()
     await expect(trackTitle).toContainText("ashess")
 
     // Next
-    await page.locator(".controls__next").click()
+    await page.getByRole("button", { name: /next/i }).click()
     await expect(trackTitle).toContainText("Sky_s Memoirs")
 
     // Prev
-    await page.locator(".controls__prev").click()
+    await page.getByRole("button", { name: /previous/i }).click()
     await expect(trackTitle).toContainText("ashess")
 
     // Prev back to start
-    await page.locator(".controls__prev").click()
+    await page.getByRole("button", { name: /previous/i }).click()
     await expect(trackTitle).toContainText("Lorn")
   })
 })
